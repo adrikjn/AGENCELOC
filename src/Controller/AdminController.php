@@ -67,7 +67,7 @@ class AdminController extends AbstractController
     public function deleteVehicule(Vehicule $vehicule, EntityManagerInterface $manager){
         $manager->remove($vehicule);
         $manager->flush();
-        $this->addFlash('success', "L'article a bien été supprimé !!!");
+        $this->addFlash('success', "L'article a bien été supprimé");
         return $this->redirectToRoute("admin_vehicule");
     }
 
@@ -104,4 +104,18 @@ class AdminController extends AbstractController
         ]);
     }
     
+    #[Route('/admin/user/delete/{id}', name: "admin_user_delete")]
+    public function deleteUser(User $user, EntityManagerInterface $manager){
+        $manager->remove($user);
+        $manager->flush();
+        $this->addFlash('success', "L'utilisateur a bien été supprimé");
+        return $this->redirectToRoute("admin_users");
+    }
+
+    #[Route('/admin/user/see/{id}', name: "admin_user_see")]
+    public function seeUser(User $user){
+        return $this->render('admin/seeUser.html.twig', [
+            'user' => $user
+        ]);
+    }
 }

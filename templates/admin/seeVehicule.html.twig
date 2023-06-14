@@ -6,13 +6,17 @@
 
 {% block body %}
 
-    {{ vehicule.modele }}
-    {{ vehicule.marque }}
-    {{ vehicule.modele }}
-    {{ vehicule.description }}
-    {{ vehicule.photo }}
-    {{ vehicule.PrixJournalier }}
-    {# {{ vehicule.DateEnregistrement }} #}
-    {# ! METTRE BOOTSTREAP CARD #}
+    	<div class="container text-center">
+        <h1 class="text-warning text-center my-3 ">Vehicule numéro : {{ vehicule.id }}</h1>
+		<div class="card bg-light mb-3 text-dark">
+			<div class="card-header h1">Marque : {{ vehicule.modele }}
+			<div class="card-body">
+				<h4 class="card-title">Prix par jour : {{ vehicule.PrixJournalier }}€
+				<p class="card-text">Description : {{ vehicule.description }}</p>
+				<p class="card-text">Date de création : {{ vehicule.DateEnregistrement|date('d/m/Y H:i:s') }}</p>
+                <img src="{{ vehicule.photo }}" alt="" width="200" class="rounded-pill">
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
