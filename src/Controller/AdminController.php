@@ -5,6 +5,7 @@ namespace App\Controller;
 use Datetime;
 use App\Entity\Vehicule;
 use App\Form\VehiculeType;
+use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,15 @@ class AdminController extends AbstractController
     public function index(): Response
     {
         return $this->render('admin/index.html.twig');
+    }
+
+    #[Route('/admin/vehicule', name: 'admin_vehicule')]
+    public function adminVehicule(VehiculeRepository $repo, EntityManagerInterface $manager){
+        $vehicules = $repo->findAll();
+        
+        return $this->render('admin/gestionVehicules.html.twig', [
+            'vehicules' => $vehicules
+        ]);
     }
 
     #[Route('/admin/vehicule/edit/{id}', name: 'admin_vehicule_edit')]
@@ -34,7 +44,7 @@ class AdminController extends AbstractController
             $manager->persist($vehicule);
             $manager->flush();
             $this->addFlash('success', 'La voiture a bien été enregistré');
-            return $this->redirectToRoute('admin');
+            return $this->redirectToRoute('admin_vehicule');
         }
 
         return $this->render('admin/addVehicule.html.twig', [

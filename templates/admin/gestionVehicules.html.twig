@@ -1,0 +1,44 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center my-4">Gestion des Vehicules</h1>
+
+        <a href="{{ path('admin_vehicule_new') }}" class="btn btn-info mb-4">Ajouter Vehicule</a>
+        <table class="table table-stripped table-dark">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Titre</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Description</th>
+                    <th>Photo</th>
+                    <th>Prix journalier</th>
+                    <th>Date d'enregistrement</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for vehicule in vehicules %}
+                <tr>
+                    <td>{{vehicule.id}}</td>
+                    <td>{{ vehicule.titre }}</td>
+                    <td>{{ vehicule.marque }}</td>
+                    <td>{{ vehicule.modele }}</td>
+                    <td>{{ vehicule.description }}</td>
+                    <td>{{ vehicule.photo }}</td>
+                    <td>{{ vehicule.PrixJournalier }}</td>
+                    <td>{{ vehicule.DateEnregistrement }}</td>
+                    {# <td>{{ vehicule.date_enregistrement }}</td> #}
+                    <td>
+                        <a href=""></a>
+                        <a href=""></a>
+                    </td>
+                </tr>
+            {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
