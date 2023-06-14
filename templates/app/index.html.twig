@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
+
+{% block body %}
     <div class="container">
         <h1 class="text-center">Bienvenue à bord</h1>
         <p class="text-center">Location de voiture 24h/24h et 7j/7</p>
+        <h2>Notre liste de voiture :</h2>
+            {% for vehicule in vehicules %}
+                
+            {% endfor %}
     </div>
-    {# ! AFFICHER LES VOITURES EN DESSOUS #}
-{% block body %}
 
 {% endblock %}

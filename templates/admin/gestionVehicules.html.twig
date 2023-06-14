@@ -5,7 +5,7 @@
         <h1 class="text-center my-4">Gestion des Vehicules</h1>
 
         <a href="{{ path('admin_vehicule_new') }}" class="btn btn-info mb-4">Ajouter Vehicule</a>
-        <table class="table table-stripped table-dark">
+        <table class="table table-stripped table-dark text-center">
             <thead>
                 <tr>
                     <th>#</th>
@@ -14,9 +14,8 @@
                     <th>Modèle</th>
                     <th>Description</th>
                     <th>Photo</th>
-                    <th>Prix journalier</th>
-                    <th>Date d'enregistrement</th>
-                    <th>Options</th>
+                    <th>Prix</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,12 +27,14 @@
                     <td>{{ vehicule.modele }}</td>
                     <td>{{ vehicule.description }}</td>
                     <td>{{ vehicule.photo }}</td>
-                    <td>{{ vehicule.PrixJournalier }}</td>
-                    <td>{{ vehicule.DateEnregistrement }}</td>
-                    {# <td>{{ vehicule.date_enregistrement }}</td> #}
+                    <td>{{ vehicule.PrixJournalier }}€</td>
                     <td>
-                        <a href=""></a>
-                        <a href=""></a>
+                        {# <a href=""><i class=""></i></a>
+                        <a href=""><i class="fas fa-edit"></i></a>
+                        <a href=""><i class="fas fa-trash"></i></a> #}
+                        <a href="{{ path('admin_vehicule_see', {id: vehicule.id}) }}" class="btn btn-primary">Voir</a>
+                        <a href="{{ path('admin_vehicule_edit', {id: vehicule.id}) }}" class="btn btn-info">Modifier</a>
+                        <a href="{{ path('admin_vehicule_delete', {id: vehicule.id}) }}" class="btn btn-danger">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

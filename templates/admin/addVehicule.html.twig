@@ -1,7 +1,12 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
+ {% if edit %}
+	<h1 class="text-center my-5 text-primary">Modifier Vehicule</h1>
+ {% else %}
 	<h1 class="text-center my-5 text-primary">Ajouter Vehicule</h1>
+ {% endif %}
+ 
 	<div class="container">
         {{ form_start(form, {
             novalidate: 'novalidate'

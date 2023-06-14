@@ -29,6 +29,13 @@ class AdminController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/vehicule/see/{id}', name: "admin_vehicule_see")]
+    public function seeVehicule(Vehicule $vehicule){
+        return $this->render('admin/seeVehicule.html.twig', [
+            'vehicule' => $vehicule
+        ]);
+    }
+
     #[Route('/admin/vehicule/edit/{id}', name: 'admin_vehicule_edit')]
     #[Route('/admin/vehicule/new', name: 'admin_vehicule_new')]
     public function formVehicule(Request $request, EntityManagerInterface $manager, Vehicule $vehicule = null){
@@ -49,7 +56,17 @@ class AdminController extends AbstractController
 
         return $this->render('admin/addVehicule.html.twig', [
             'form' => $form,
-            // 'editMode' => $vehicule->getId()!==null
+            'edit' => $vehicule->getId()!==null
         ]);
     }
+
+    #[Route('/admin/vehicule/delete/{id}', name: "admin_vehicule_delete")]
+    public function deleteVehicule(Vehicule $vehicule, EntityManagerInterface $manager){
+        $manager->remove($vehicule);
+        $manager->flush();
+        $this->addFlash('success', "L'article a bien été supprimé !!!");
+        return $this->redirectToRoute("admin_vehicule");
+    }
+
+    
 }
