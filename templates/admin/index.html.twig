@@ -1,7 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Hello AdminController!
+{% endblock %}
 
 {% block body %}
+	<h1 class="text-center text-primary my-5">Bienvenue Admin</h1>
+	<div class="container">
+		<div class="row">
+			<div class="card text-white bg-primary mb-3 col-6 mx-3 text-center" style="max-width: 20rem;">
+				<div class="card-body">
+					<h4 class="card-title">Backend Vehicule</h4>
+					<a href="{{ path('admin_vehicule') }}" class="btn btn-secondary text-decoration-none">Gestion des Véhicules</a>
+				</div>
+			</div>
+			<div class="card text-white bg-secondary mb-3 col-12 mx-3 text-center" style="max-width: 20rem;">
+				<div class="card-body">
+					<h4 class="card-title">Backend User</h4>
+					<a href="" class="btn btn-info text-decoration-none">Administrer</a>
+				</div>
+			</div>
+
+			<div class="card text-white bg-warning mb-3 col-12 mx-3 text-center" style="max-width: 20rem;">
+				<div class="card-body">
+					<h4 class="card-title">Backend Commande</h4>
+					<a href="" class="btn btn-success text-decoration-none">Administrer</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
