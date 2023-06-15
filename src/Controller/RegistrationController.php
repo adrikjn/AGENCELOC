@@ -15,31 +15,34 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class RegistrationController extends AbstractController
 {
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function formUser(UserPasswordHasherInterface $userPasswordHasher, Request $request, EntityManagerInterface $manager, User $user = null)
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        if ($user == null) {
+            $user = new User;
+        }
+
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setDateEnregistrement(new \Datetime);
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+            $user->setDateEnregistrement(new \DateTime);
 
-            $entityManager->persist($user);
-            $entityManager->flush();
-            // do anything else you need here, like send an email
+            if (!$user->getId()) {
+                // Hasher le mot de passe uniquement lors de l'ajout d'un nouvel utilisateur
+                $hashedPassword = $userPasswordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($hashedPassword);
+            }
 
-            return $this->redirectToRoute('app_app');
+            $manager->persist($user);
+            $manager->flush();
+
+            $this->addFlash('success', "L'utilisateur a bien été enregistré");
+            return $this->redirectToRoute('admin_users');
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
+        return $this->render('admin/addUsers.html.twig', [
+            'form' => $form->createView(),
+            'editUser' => $user->getId() !== null
         ]);
     }
 }

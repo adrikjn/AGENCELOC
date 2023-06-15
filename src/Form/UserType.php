@@ -9,19 +9,31 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('email', EmailType::class, [
-            'attr' => [
-                'placeholder' => "Entrez l'email"
-            ]
-        ])
-            ->add('roles')
-            ->add('password')
+            ->add('email', EmailType::class, [
+                'attr' => [
+                    'placeholder' => "Entrez l'email"
+                ]
+            ])
+            ->add('roles', ChoiceType::class, [
+                'multiple' => true,
+                'choices' => [
+                    'ROLE_USER' => 'ROLE_USER',
+                    'ROLE_ADMIN' => 'ROLE_ADMIN'
+                ]
+            ])
+            ->add('password', PasswordType::class, [
+                'label' => 'Mot de passe',
+                'attr' => [
+                    'placeholder' => 'Entrez le mot de passe'
+                ]
+            ])
             ->add('pseudo', TextType::class, [
                 'attr' => [
                     'placeholder' => "Entrez le pseudo"
@@ -42,8 +54,8 @@ class UserType extends AbstractType
                     'Homme' => "m",
                     'Femme' => 'f'
                 ]
-                ])
-            ->add('date_enregistrement')
+            ])
+            // ->add('date_enregistrement')
         ;
     }
 

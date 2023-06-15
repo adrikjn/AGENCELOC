@@ -2,17 +2,23 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="text-center text-primary my-4">Ajouter Utilisateur</h1>
-    {{ form_start(form, {
-            novalidate: 'novalidate'
-        }) }}
-        {{ form_row(form.pseudo)}}
-        {{ form_row(form.password)}}
-        {{ form_row(form.nom)}}
-        {{ form_row(form.prenom)}}
-        {{ form_row(form.email)}}
-        {{ form_row(form.roles|join(', '))}}
-        {{ form_row(form.civilite)}}
-    {{ form_end(form) }}
+    {% if editUser %}
+        <h1 class="text-center text-primary my-4">Modifier Utilisateur</h1>
+    {% else %}
+        <h1 class="text-center text-primary my-4">Ajouter Utilisateur</h1>
+    {% endif %}
+    
+
+   {{ form_start(form) }}
+    {{ form_row(form.pseudo) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.roles) }}
+    {{ form_row(form.civilite) }}
+
+    <input type="submit" value="Envoyer" class="btn btn-primary">
+{{ form_end(form) }}
 </div>
 {% endblock %}

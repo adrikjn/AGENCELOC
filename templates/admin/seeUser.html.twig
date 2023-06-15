@@ -9,8 +9,8 @@
 				Nom : {{ user.nom }}</div>
 			<div class="card-body">
 				<h4 class="card-title">Compte : {{ user.pseudo }}
-					--
-					Email : {{ user.email }}</h4>
+				<p class="card-text">Roles : {{ user.roles|join(', ') }}</p>
+				<p class="card-text">Email : {{ user.email }}</p>
 				<p class="card-text">Sexe : {{ user.civilite }}</p>
 				<p class="card-text">Date d'inscription : {{ user.DateEnregistrement|date('d/m/Y H:i:s') }}</p>
 			</div>

@@ -35,7 +35,7 @@
                     <td>{{ user.DateEnregistrement|date('d/m/Y H:i:s') }}</td>
                     <td>
                         <a href="{{ path('admin_user_see', {id: user.id}) }}" class="btn btn-primary"><i class="bi bi-search"></i></a>
-                        <a href="" class="btn btn-info"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{ path('admin_users_edit', {id: user.id}) }}" class="btn btn-info"><i class="bi bi-pencil-square"></i></a>
                         <a href="{{ path('admin_user_delete', {id: user.id}) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
 
                     </td>

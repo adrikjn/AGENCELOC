@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use Datetime;
 use App\Entity\User;
-use App\Entity\Vehicule;
 use App\Form\UserType;
+use App\Entity\Vehicule;
 use App\Form\VehiculeType;
 use App\Repository\UserRepository;
 use App\Repository\VehiculeRepository;
@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminController extends AbstractController
 {
@@ -80,9 +81,10 @@ class AdminController extends AbstractController
         ]);
     }
 
+
     #[Route('/admin/users/edit/{id}', name: 'admin_users_edit')]
     #[Route('/admin/users/new', name: 'admin_users_new')]
-    public function formUser(Request $request, EntityManagerInterface $manager, User $user = null){
+    public function formUser(UserPasswordHasherInterface $userPasswordHasher, Request $request, EntityManagerInterface $manager, User $user = null){
 
         if($user == null){
             $user = new User;
@@ -92,9 +94,15 @@ class AdminController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $user->setDateEnregistrement(new \Datetime);
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
             $manager->persist($user);
             $manager->flush();
-            $this->addFlash('success', 'Le user a bien été enregistré');
+            $this->addFlash('success', "L'utilisateur a bien été enregistré");
             return $this->redirectToRoute('admin_users');
         }
 
@@ -119,3 +127,6 @@ class AdminController extends AbstractController
         ]);
     }
 }
+
+
+
