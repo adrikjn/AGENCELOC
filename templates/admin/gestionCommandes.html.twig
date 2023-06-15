@@ -25,30 +25,17 @@
             <tr>
                 <td>{{ commande.id }}</td>
                 <td>{{ commande.membre.id }} - {{ commande.membre.prenom }} {{ commande.membre.nom }} - {{ commande.membre.email }}</td>
-                <td>{{ commande.id }}</td>
-                <td>{{ commande.id }}</td>
-                <td>{{ commande.id }}</td>
-                <td>{{ commande.id }}</td>
-                <td>{{ commande.id }}</td>
+                <td> {{ commande.vehicule.marque }} {{ commande.vehicule.titre }}</td>
+                <td>{{ commande.DateHeureDepart|date('d/m/Y H:i:s') }}</td>
+                <td>{{ commande.DateHeureFin|date('d/m/Y H:i:s') }}</td> 
+                <td>{{ commande.PrixTotal }}€</td>
+                <td>{{ commande.DateEnregistrement|date('d/m/Y H:i:s') }}</td>
+                <td>
+                    <a href="{{ path('admin_commande_see', {id: commande.id}) }}"><i class="bi bi-search text-primary"></i></a>
+                    <a href=""><i class="bi bi-pencil-square text-info"></i></a>
+                    <a href="{{ path('admin_commande_delete', {id: commande.id}) }}"><i class="bi bi-trash text-danger"></i></a>
+                </td>
             </tr>
-               
-            {# {% for user in users %}
-                <tr>
-                    <td>{{user.id}}</td>
-                    <td>{{ user.pseudo }}</td>
-                    <td>{{ user.nom }}</td>
-                    <td>{{ user.prenom }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.civilite }}</td>
-                    <td>{{ user.roles|join(', ') }}</td>
-                    <td>{{ user.DateEnregistrement|date('d/m/Y H:i:s') }}</td>
-                    <td>
-                        <a href="{{ path('admin_user_see', {id: user.id}) }}" class="btn btn-primary"><i class="bi bi-search"></i></a>
-                        <a href="{{ path('admin_users_edit', {id: user.id}) }}" class="btn btn-info"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{{ path('admin_user_delete', {id: user.id}) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
-
-                    </td>
-                </tr> #}
             {% endfor %}
                 
             </tbody>

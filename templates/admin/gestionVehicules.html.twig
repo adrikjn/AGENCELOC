@@ -35,9 +35,9 @@
                         {# <a href=""><i class=""></i></a>
                         <a href=""><i class="fas fa-edit"></i></a>
                         <a href=""><i class="fas fa-trash"></i></a> #}
-                        <a href="{{ path('admin_vehicule_see', {id: vehicule.id}) }}" class="btn btn-primary"><i class="bi bi-search"></i></a>
-                        <a href="{{ path('admin_vehicule_edit', {id: vehicule.id}) }}" class="btn btn-info"><i class="bi bi-pencil-square"></i></a>
-                        <a href="{{ path('admin_vehicule_delete', {id: vehicule.id}) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        <a href="{{ path('admin_vehicule_see', {id: vehicule.id}) }}"><i class="bi bi-search text-primary"></i></a>
+                        <a href="{{ path('admin_vehicule_edit', {id: vehicule.id}) }}"><i class="bi bi-pencil-square text-info"></i></a>
+                        <a href="{{ path('admin_vehicule_delete', {id: vehicule.id}) }}"><i class="bi bi-trash text-danger"></i></a>
                     </td>
                 </tr>
             {% endfor %}

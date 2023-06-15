@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use Datetime;
 use App\Entity\User;
 use App\Form\UserType;
@@ -135,6 +136,21 @@ class AdminController extends AbstractController
         
         return $this->render('admin/gestionCommandes.html.twig', [
             'commandes' => $commandes
+        ]);
+    }
+
+    #[Route('/admin/commande/delete/{id}', name: "admin_commande_delete")]
+    public function commandeUser(Commande $commande, EntityManagerInterface $manager){
+        $manager->remove($commande);
+        $manager->flush();
+        $this->addFlash('success', "La commande a bien été supprimé");
+        return $this->redirectToRoute("admin_commandes");
+    }
+
+    #[Route('/admin/commande/see/{id}', name: "admin_commande_see")]
+    public function seeCommande(Commande $commande){
+        return $this->render('admin/seeCommande.html.twig', [
+            'commande' => $commande
         ]);
     }
 }

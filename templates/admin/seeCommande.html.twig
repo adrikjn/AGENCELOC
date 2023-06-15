@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Voir Commandes
+{% endblock %}
+
+{% block body %}
+<h1 class="text-center text-primary mt-3">Commande numéro : <span class="font-weight-bold">{{ commande.membre.id }}</span></h1>
+<h2 class="text-center text-primary mb-3">{{ commande.membre.email }} // {{ commande.membre.nom }} {{ commande.membre.prenom }}</h2>
+
+<div class="container">
+  <div class="card mb-3 w-50 mx-auto">
+    <h3 class="card-header text-center">{{ commande.membre.email }} <br> {{ commande.membre.nom }} {{ commande.membre.prenom }}</h3>
+    <div class="card-body">
+      <h5 class="card-title text-center h2">{{ commande.vehicule.modele }}</h5>
+    </div>
+    <img src="{{ commande.vehicule.photo }}" alt="">
+    <div class="card-body">
+      <p class="card-text">{{ commande.vehicule.description }}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <span class="font-weight-bold">Prix à payer :</span> {{ commande.PrixTotal }}€
+        <small><br><span class="font-italic">Soit {{ commande.vehicule.PrixJournalier }}€ par jour</span></small>
+      </li>
+      <li class="list-group-item">
+        <span class="font-weight-bold">Période de :</span> {{ commande.DateHeureDepart|date('d/m/Y H:i:s') }} à {{commande.DateHeureFin|date('d/m/Y H:i:s')}}
+      </li>
+    </ul>
+    <div class="card-footer text-muted">
+      <span class="font-italic">Posté le :</span> {{ commande.DateEnregistrement|date('d/m/Y H:i:s') }}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -21,7 +21,10 @@
                 <div class="card-body">
                     <p class="card-text">{{ vehicule.description }}</p>
                     <p class="card-text text-muted text-end">{{ vehicule.PrixJournalier }}€/jour</p>
+                    {% if app.user %}
                     <a href="{{ path('command', {'id': vehicule.id}) }}" class="btn btn-primary">Réserver dès maintenant !</a>
+                    {% endif %}
+                    
                 </div>
             </div>
         {% endfor %}
