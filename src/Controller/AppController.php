@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use Datetime;
 use App\Entity\Commande;
+use App\Entity\User;
+use App\Entity\Vehicule;
 use App\Form\CommandeType;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,15 +25,28 @@ class AppController extends AbstractController
         ]);
     }
 
-    #[Route('/commander', name:'command')]
-    public function commanderVehicule(Request $request, EntityManagerInterface $manager){
+    #[Route('/commander/{id}', name:'command')]
+    public function commanderVehicule(Request $request, EntityManagerInterface $manager, Vehicule $vehicule= null){
+
+        if($vehicule == null){
+            return $this->redirectToRoute('app_app');
+        }
+
         $commande = new Commande;
 
+        if($this->getUser()){
+            $user = $this->getUser();
+        }
+
         $form = $this->createForm(CommandeType::class, $commande);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
-            $commande->setDateEnregistrement(new Datetime);
+            $commande->setDateEnregistrement(new Datetime)
+                    ->setVehicule($vehicule)
+                    ->setMembre($user)
+                    ->setPrixTotal($commande->calculerPrixTotal());
             $manager->persist($commande);
             $manager->flush();
             $this->addFlash('success', "Votre commande a bien été pris");

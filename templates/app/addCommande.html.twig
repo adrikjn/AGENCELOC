@@ -5,5 +5,13 @@
 {% endblock %}
 
 {% block body %}
-    
+<div class="container">
+ <h1 class="text-center text-primary my-3">Veuillez sélectionnez la date de départ et la date de fin du véhicule </h1>
+    {{ form_start(form) }}
+    {{ form_row(form.date_heure_depart)}}
+    {{ form_row(form.date_heure_fin) }}
+
+    <input type="submit" class="btn btn-primary">
+    {{ form_end(form) }}
+</div>
 {% endblock %}

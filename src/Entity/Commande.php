@@ -36,6 +36,21 @@ class Commande
     #[ORM\ManyToOne(inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Vehicule $vehicule = null;
+    
+
+    public function calculerPrixTotal()
+{
+    $dateDepart = $this->getDateHeureDepart();
+    $dateFin = $this->getDateHeureFin();
+    $prixJournalier = $this->getVehicule()->getPrixJournalier();
+
+    $interval = $dateDepart->diff($dateFin);
+    $nombreJours = $interval->days + 1; // Ajoute 1 pour inclure le jour de départ
+
+    $prixTotal = $prixJournalier * $nombreJours;
+
+    return $prixTotal;
+}
 
 
     public function getId(): ?int

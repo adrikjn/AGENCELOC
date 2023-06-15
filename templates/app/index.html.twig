@@ -19,14 +19,12 @@
                 <div class="card-body">
                     <p class="card-text">{{ vehicule.description }}</p>
                     <p class="card-text text-muted text-end">{{ vehicule.PrixJournalier }}€/jour</p>
-                    <a href="{{ path('command') }}" class="btn btn-primary">Réserver dès maintenant !</a>
+                    <a href="{{ path('command', {'id': vehicule.id}) }}" class="btn btn-primary">Réserver dès maintenant !</a>
                 </div>
             </div>
         {% endfor %}
     </div>
 {% endblock %}
-
-
 
 
    
