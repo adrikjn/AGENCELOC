@@ -8,6 +8,7 @@ use App\Form\UserType;
 use App\Entity\Vehicule;
 use App\Form\VehiculeType;
 use App\Repository\UserRepository;
+use App\Repository\CommandeRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,6 +125,16 @@ class AdminController extends AbstractController
     public function seeUser(User $user){
         return $this->render('admin/seeUser.html.twig', [
             'user' => $user
+        ]);
+    }
+
+    #[Route('/admin/commandes', name: 'admin_commandes')]
+    public function adminCommandes(CommandeRepository $repo, EntityManagerInterface $manager){
+        $commandes = $repo->findAll();
+        // dd($commandes);
+        
+        return $this->render('admin/gestionCommandes.html.twig', [
+            'commandes' => $commandes
         ]);
     }
 }

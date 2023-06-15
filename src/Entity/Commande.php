@@ -45,7 +45,7 @@ class Commande
     $prixJournalier = $this->getVehicule()->getPrixJournalier();
 
     $interval = $dateDepart->diff($dateFin);
-    $nombreJours = $interval->days + 1; // Ajoute 1 pour inclure le jour de départ
+    $nombreJours = $interval->days + 1;
 
     $prixTotal = $prixJournalier * $nombreJours;
 
