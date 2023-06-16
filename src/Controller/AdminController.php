@@ -28,7 +28,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/vehicule', name: 'admin_vehicule')]
-    public function adminVehicule(VehiculeRepository $repo, EntityManagerInterface $manager){
+    public function adminVehicule(VehiculeRepository $repo){
         $vehicules = $repo->findAll();
         
         return $this->render('admin/gestionVehicules.html.twig', [
@@ -76,7 +76,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/users', name: 'admin_users')]
-    public function adminUser(UserRepository $repo, EntityManagerInterface $manager){
+    public function adminUser(UserRepository $repo){
         $users = $repo->findAll();
         
         return $this->render('admin/gestionUsers.html.twig', [
@@ -139,7 +139,7 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/commandes', name: 'admin_commandes')]
-    public function adminCommandes(CommandeRepository $repo, EntityManagerInterface $manager){
+    public function adminCommandes(CommandeRepository $repo,){
         $commandes = $repo->findAll();
         // dd($commandes);
         

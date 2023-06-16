@@ -19,7 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class AppController extends AbstractController
 {
     #[Route('/', name: 'app_app')]
-    public function index(VehiculeRepository $repo, EntityManagerInterface $manager): Response
+    public function index(VehiculeRepository $repo): Response
     {
         $vehicules = $repo->findAll();
         return $this->render('app/index.html.twig', [
@@ -31,7 +31,6 @@ class AppController extends AbstractController
     public function commanderVehicule(Request $request, EntityManagerInterface $manager, Vehicule $vehicule= null){
 
         if($vehicule == null){
-            $this->addFlash('success', "Votre commande a bien été pris");
             return $this->redirectToRoute('app_app');
         }
 
@@ -66,7 +65,6 @@ class AppController extends AbstractController
 
     #[Route('/moncompte', name:"acc_info")]
     public function accountInfo(CommandeRepository $repo, Commande $commande = null){
-
         $idMembre = $this->getUser('id');
         $commande = $repo->findBy(["membre" => $idMembre]);
 
