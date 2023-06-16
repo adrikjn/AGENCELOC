@@ -64,12 +64,16 @@ class AppController extends AbstractController
     }
 
     #[Route('/moncompte', name:"acc_info")]
-    public function accountInfo(CommandeRepository $repo, Commande $commande = null){
+    public function accountInfo(CommandeRepository $repo, Commande $commande = null, UserRepository $userRepo){
+
+        
         $idMembre = $this->getUser('id');
         $commande = $repo->findBy(["membre" => $idMembre]);
+        $user = $userRepo->find($idMembre);
 
         return $this->render('app/monCompte.html.twig', [
-            'commande' => $commande
+            'commande' => $commande,
+            'user' => $user
         ]);
     }
 }

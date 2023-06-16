@@ -5,40 +5,52 @@
 {% endblock %}
 
 {% block body %}
-{% if app.user %}
-	<div class="container">
-    <h1 class="text-center text-primary mt-5">Commandes de l'utilisateur</h1>
-		<div class="row">
-			{% for item in commande %}
-				<div class="col-6">
-					<div class="card my-5">
-						<h3 class="card-header text-center">Commandes de l'utilisateur :
-							<span class="font-weight-bold">{{ item.membre.nom }}</span>
-							<span class="font-weight-bold">{{ item.membre.prenom }}</span>
-						</h3>
-						<div class="card-body">
-							<h5 class="card-title">{{ item.vehicule.titre }}</h5>
-							<h6 class="card-subtitle text-muted">Prix pour la durée :
-								<span class="font-weight-bold">{{ item.PrixTotal }}€</span>
-							</h6>
-						</div>
-						<img src="{{ item.vehicule.photo }}" alt="" class="card-img-top">
-						<div class="card-body">
-							<p class="card-text">{{ item.vehicule.description }}</p>
-						</div>
-						<div class="card-footer text-muted">
-							Du
-							<span class="font-italic">{{ item.DateHeureDepart|date('d/m/Y H:i:s') }}</span>
-							au
-							<span class="font-italic">{{ item.DateHeureFin|date('d/m/Y H:i:s') }}</span>
+	{% if app.user %}
+		<div class="container">
+			<h1 class="text-primary text-center mt-5">Informations de l'utilisateur</h1>
+			<div class="card mt-3">
+				<div class="card-body">
+					<h4 class="card-title">Email :
+						{{ user.email  }}</h4>
+					<h5 class="card-subtitle mb-2 text-muted">{{ user.nom }}
+						{{ user.prenom }}</h5>
+					<h6 class="card-subtitle mb-2 text-muted">Civilité :
+						{{ user.civilite|capitalize }}</h6>
+					<a href="#" class="btn btn-warning">Changer les informations</a>
+				</div>
+			</div>
+			<h2 class="text-center text-info mt-5">Commandes de l'utilisateur</h2>
+			<div class="row">
+				{% for item in commande %}
+					<div class="col-6">
+						<div class="card my-5">
+							<h3 class="card-header text-center">Commandes de l'utilisateur :
+								<span class="font-weight-bold">{{ item.membre.nom }}</span>
+								<span class="font-weight-bold">{{ item.membre.prenom }}</span>
+							</h3>
+							<div class="card-body">
+								<h5 class="card-title">{{ item.vehicule.titre }}</h5>
+								<h6 class="card-subtitle text-muted">Prix pour la durée :
+									<span class="font-weight-bold">{{ item.PrixTotal }}€</span>
+								</h6>
+							</div>
+							<img src="{{ item.vehicule.photo }}" alt="" class="card-img-top">
+							<div class="card-body">
+								<p class="card-text">{{ item.vehicule.description }}</p>
+							</div>
+							<div class="card-footer text-muted">
+								Du
+								<span class="font-italic">{{ item.DateHeureDepart|date('d/m/Y H:i:s') }}</span>
+								au
+								<span class="font-italic">{{ item.DateHeureFin|date('d/m/Y H:i:s') }}</span>
+							</div>
 						</div>
 					</div>
-				</div>
-			{% endfor %}
+				{% endfor %}
+			</div>
 		</div>
-	</div>
-    {% else %}
-        <h1 class="text-primary text-center my-5">Veuillez vous connecter</h1>
-{% endif %}
+	{% else %}
+		<h1 class="text-primary text-center my-5">Veuillez vous connecter</h1>
+	{% endif %}
 
 {% endblock %}
