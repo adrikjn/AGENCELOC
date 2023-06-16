@@ -32,7 +32,7 @@
                 <td>{{ commande.DateEnregistrement|date('d/m/Y H:i:s') }}</td>
                 <td>
                     <a href="{{ path('admin_commande_see', {id: commande.id}) }}"><i class="bi bi-search text-primary"></i></a>
-                    <a href=""><i class="bi bi-pencil-square text-info"></i></a>
+                    <a href="{{ path('admin_commande_update', {id: commande.id}) }}"><i class="bi bi-pencil-square text-info"></i></a>
                     <a href="{{ path('admin_commande_delete', {id: commande.id}) }}"><i class="bi bi-trash text-danger"></i></a>
                 </td>
             </tr>

@@ -7,6 +7,7 @@ use Datetime;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Vehicule;
+use App\Form\CommandeType;
 use App\Form\VehiculeType;
 use App\Repository\UserRepository;
 use App\Repository\CommandeRepository;
@@ -153,7 +154,23 @@ class AdminController extends AbstractController
             'commande' => $commande
         ]);
     }
+    
+    #[Route('admin/commande/edit/{id}', name:"admin_commande_update")]
+    public function editCommande(Request $request, EntityManagerInterface $manager, Commande $commande = null){
+        
+  
+        $form = $this->createForm(CommandeType::class, $commande);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($commande);
+            $manager->flush();
+            $this->addFlash('success', 'La commande a bien été enregistré');
+            return $this->redirectToRoute('admin_commandes');
+        }
+
+        return $this->render('admin/editCommandes.html.twig', [
+            'edit' => $form
+        ]);
+    }
 }
-
-
 
