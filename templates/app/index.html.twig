@@ -1,36 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
-
-{% block body %}
- {% for message in app.flashes('success') %}
-        <div class="alert alert-success text-center w-50 mx-auto my-2">{{ message }}</div>
-    {% endfor %}
-    <div class="container">
-        <h1 class="text-center">Bienvenue à bord</h1>
-        <p class="text-center">Location de voiture 24h/24h et 7j/7</p>
-        <h2 class="mb-5">Notre liste de voiture :</h2>
-        {% for vehicule in vehicules %}
-            <div class="card mb-3">
-                <h3 class="card-header">{{ vehicule.marque }}</h3>
-                <div class="card-body">
-                    <h5 class="card-title text-primary fw-bold">{{ vehicule.titre }}</h5>
-                    <h6 class="card-subtitle text-muted font-italic">{{ vehicule.modele }}</h6>
-                </div>
-                <img src="{{ vehicule.photo }}" alt="" class="img-fluid w-75 mx-auto">
-                <div class="card-body">
-                    <p class="card-text">{{ vehicule.description }}</p>
-                    <p class="card-text text-muted text-end">{{ vehicule.PrixJournalier }}€/jour</p>
-                    {% if app.user %}
-                    <a href="{{ path('command', {'id': vehicule.id}) }}" class="btn btn-primary">Réserver dès maintenant !</a>
-                    {% endif %}
-                    
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+{% block title %}Home
 {% endblock %}
 
-
-   
-
+{% block body %}
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success text-center w-50 mx-auto my-2">{{ message }}</div>
+	{% endfor %}
+    
+	{% for message in app.flashes('dark') %}
+		<div class="alert alert-dark text-center w-50 mx-auto my-2">{{ message }}</div>
+	{% endfor %}
+    
+	<div class="container">
+		<h1 class="text-center">Bienvenue à bord</h1>
+		<p class="text-center">Location de voiture 24h/24h et 7j/7</p>
+		<h2 class="mb-5">Notre liste de voiture :</h2>
+		{% for vehicule in vehicules %}
+			<div class="card mb-3">
+				<h3 class="card-header">{{ vehicule.marque }}</h3>
+				<div class="card-body">
+					<h5 class="card-title text-primary fw-bold">{{ vehicule.titre }}</h5>
+					<h6 class="card-subtitle text-muted font-italic">{{ vehicule.modele }}</h6>
+				</div>
+				<img src="{{ vehicule.photo }}" alt="" class="img-fluid w-75 mx-auto">
+				<div class="card-body">
+					<p class="card-text">{{ vehicule.description }}</p>
+					<p class="card-text text-muted text-end">{{ vehicule.PrixJournalier }}€/jour</p>
+					<a href="{{ path('command', {'id': vehicule.id}) }}" class="btn btn-primary">Réserver dès maintenant !</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

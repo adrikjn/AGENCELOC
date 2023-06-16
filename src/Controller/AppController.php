@@ -7,6 +7,8 @@ use App\Entity\Commande;
 use App\Entity\User;
 use App\Entity\Vehicule;
 use App\Form\CommandeType;
+use App\Repository\CommandeRepository;
+use App\Repository\UserRepository;
 use App\Repository\VehiculeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +31,7 @@ class AppController extends AbstractController
     public function commanderVehicule(Request $request, EntityManagerInterface $manager, Vehicule $vehicule= null){
 
         if($vehicule == null){
+            $this->addFlash('success', "Votre commande a bien été pris");
             return $this->redirectToRoute('app_app');
         }
 
@@ -36,6 +39,9 @@ class AppController extends AbstractController
 
         if($this->getUser()){
             $user = $this->getUser();
+        }else {
+            $this->addFlash('dark', "Veuillez vous connecter");
+            return $this->redirectToRoute('app_app');
         }
 
         $form = $this->createForm(CommandeType::class, $commande);
@@ -55,6 +61,16 @@ class AppController extends AbstractController
 
         return $this->render('app/addCommande.html.twig', [
             'form' => $form
+        ]);
+    }
+
+    #[Route('/moncompte', name:"acc_info")]
+    public function accountInfo(CommandeRepository $repo, EntityManagerInterface $manager,Commande $commande = null){
+
+        $commande = $repo->findBy();
+
+        return $this->render('app/monCompte.html.twig', [
+            'commande' => $commande
         ]);
     }
 }
