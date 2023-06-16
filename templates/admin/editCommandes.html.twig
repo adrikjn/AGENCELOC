@@ -1,14 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Modifier Commandes
+	Modifier Commandes
 {% endblock %}
 
 {% block body %}
-    <div class="container">
-    <h1 class="text-center text-primary my-5">Modifier date de réservation</h1>
-        {{ form_start(edit) }}
-            
-        {{ form_end(edit) }}
-    </div>
+	<div class="container">
+		<h1 class="text-center text-primary my-5">Modifier date de réservation</h1>
+		{{ form_start(edit) }}
+        
+		{{ form_row(edit.date_heure_depart) }}
+        {{ form_row(edit.date_heure_fin) }}
+		<input type="submit" value="Envoyer" class="btn btn-primary">
+		{{ form_end(edit) }}
+	</div>
 {% endblock %}

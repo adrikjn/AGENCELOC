@@ -91,18 +91,26 @@ class AdminController extends AbstractController
 
         if($user == null){
             $user = new User;
+        }else{
+            $mdp =$user->getPassword();
         }
-
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $user->setDateEnregistrement(new \Datetime);
-            $user->setPassword(
+            if($user->getId()!==null){
+                $user->setPassword($mdp);
+            }
+            else{
+                $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('password')->getData()
                 )
             );
+            }
+            
             $manager->persist($user);
             $manager->flush();
             $this->addFlash('success', "L'utilisateur a bien été enregistré");
