@@ -28,7 +28,6 @@ class RegistrationController extends AbstractController
             $user->setDateEnregistrement(new \DateTime);
 
             if (!$user->getId()) {
-                // Hasher le mot de passe uniquement lors de l'ajout d'un nouvel utilisateur
                 $hashedPassword = $userPasswordHasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($hashedPassword);
             }
