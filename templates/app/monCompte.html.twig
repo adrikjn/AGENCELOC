@@ -1,11 +1,44 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Mon Compte
+	Mon Compte
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-center my-5 text-primary"></h1>
+{% if app.user %}
+	<div class="container">
+    <h1 class="text-center text-primary mt-5">Commandes de l'utilisateur</h1>
+		<div class="row">
+			{% for item in commande %}
+				<div class="col-6">
+					<div class="card my-5">
+						<h3 class="card-header text-center">Commandes de l'utilisateur :
+							<span class="font-weight-bold">{{ item.membre.nom }}</span>
+							<span class="font-weight-bold">{{ item.membre.prenom }}</span>
+						</h3>
+						<div class="card-body">
+							<h5 class="card-title">{{ item.vehicule.titre }}</h5>
+							<h6 class="card-subtitle text-muted">Prix pour la durée :
+								<span class="font-weight-bold">{{ item.PrixTotal }}€</span>
+							</h6>
+						</div>
+						<img src="{{ item.vehicule.photo }}" alt="" class="card-img-top">
+						<div class="card-body">
+							<p class="card-text">{{ item.vehicule.description }}</p>
+						</div>
+						<div class="card-footer text-muted">
+							Du
+							<span class="font-italic">{{ item.DateHeureDepart|date('d/m/Y H:i:s') }}</span>
+							au
+							<span class="font-italic">{{ item.DateHeureFin|date('d/m/Y H:i:s') }}</span>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+    {% else %}
+        <h1 class="text-primary text-center my-5">Veuillez vous connecter</h1>
+{% endif %}
 
-    
 {% endblock %}

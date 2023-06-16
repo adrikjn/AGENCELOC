@@ -65,9 +65,10 @@ class AppController extends AbstractController
     }
 
     #[Route('/moncompte', name:"acc_info")]
-    public function accountInfo(CommandeRepository $repo, EntityManagerInterface $manager,Commande $commande = null){
+    public function accountInfo(CommandeRepository $repo, Commande $commande = null){
 
-        $commande = $repo->findBy();
+        $idMembre = $this->getUser('id');
+        $commande = $repo->findBy(["membre" => $idMembre]);
 
         return $this->render('app/monCompte.html.twig', [
             'commande' => $commande
