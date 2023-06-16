@@ -34,7 +34,7 @@
 					</ul>
 				</div>
 					{% if app.user %}
-						<a href="{{ path('acc_info') }}"><i class="bi bi-person-circle text-dark h3 mx-3"></i></a>
+						<a href="{{ path('acc_info') }}"><i class="bi bi-person-circle btn btn-outline-dark text-dark h3 mx-3"></i></a>
 						<a class="btn btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
 					{% else %}
 						<a class="btn btn-primary mx-3" href="{{ path('app_login') }}">Connection</a>
