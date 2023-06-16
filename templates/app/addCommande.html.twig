@@ -1,17 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Réserver
+	Réserver
 {% endblock %}
 
 {% block body %}
-<div class="container">
- <h1 class="text-center text-primary my-3">Veuillez sélectionnez la date de départ et la date de fin du véhicule </h1>
-    {{ form_start(form) }}
-    {{ form_row(form.date_heure_depart)}}
-    {{ form_row(form.date_heure_fin) }}
+	{% if app.user %}
+		<div class="container">
+			<h1 class="text-center text-primary my-3">Veuillez sélectionner la date de départ et la date de fin du véhicule</h1>
+			{{ form_start(form) }}
+			{{ form_row(form.date_heure_depart) }}
+			{{ form_row(form.date_heure_fin) }}
 
-    <input type="submit" class="btn btn-primary">
-    {{ form_end(form) }}
-</div>
+			<input type="submit" class="btn btn-primary">
+			{{ form_end(form) }}
+		</div>
+	{% else %}
+		<h1 class="text-center text-primary my-3">Veuillez vous connecter afin de réserver cette voiture !</h1>
+	{% endif %}
 {% endblock %}
